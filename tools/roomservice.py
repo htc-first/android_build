@@ -15,13 +15,13 @@ else:
 
 device = product[product.index("_") + 1:]
 if not depsonly:
-    print "Device %s not found. Attempting to retrieve device repository from CyanogenMod Github (http://github.com/CyanogenMod)." % device
+    print "Device %s not found. Attempting to retrieve device repository from  Github (http://github.com)." % device
 
 repositories = []
 
 page = 1
 while not depsonly:
-    result = json.loads(urllib2.urlopen("http://github.com/api/v2/json/repos/show/CyanogenMod?page=%d" % page).read())
+    result = json.loads(urllib2.urlopen("http://github.com/api/v2/json/repos/show/htc-first?page=%d" % page).read())
     if len(result['repositories']) == 0:
         break
     repositories = repositories + result['repositories']
@@ -100,9 +100,9 @@ def add_to_manifest(repositories):
             print 'CyanogenMod/%s already exists' % (repo_name)
             continue
 
-        print 'Adding dependency: CyanogenMod/%s -> %s' % (repo_name, repo_target)
+        print 'Adding dependency: htc-first/%s -> %s' % (repo_name, repo_target)
         project = ElementTree.Element("project", attrib = { "path": repo_target,
-            "remote": "github", "name": "CyanogenMod/%s" % repo_name })
+            "remote": "github", "name": "htc-first/%s" % repo_name })
 
         if 'branch' in repository:
             project.set('revision',repository['branch'])
@@ -128,7 +128,7 @@ def fetch_dependencies(repo_path):
         fetch_list = []
 
         for dependency in dependencies:
-            if not is_in_manifest("CyanogenMod/%s" % dependency['repository']):
+            if not is_in_manifest("htc-first/%s" % dependency['repository']):
                 fetch_list.append(dependency)
                 syncable_repos.append(dependency['target_path'])
 
