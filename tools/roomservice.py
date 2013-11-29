@@ -170,7 +170,7 @@ def add_to_manifest(repositories, fallback_branch = None):
         repo_name = repository['repository']
         repo_target = repository['target_path']
         if exists_in_tree(lm, repo_name):
-            print('CyanogenMod/%s already exists' % (repo_name))
+            print('htc-first/%s already exists' % (repo_name))
             continue
 
         print('Adding dependency: htc-first/%s -> %s' % (repo_name, repo_target))
